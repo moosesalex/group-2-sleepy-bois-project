@@ -37,8 +37,8 @@ public class Lane : MonoBehaviour
                 timeStamps.Add(null);
                 var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time + note.Length, SongManager.midiFile.GetTempoMap());
                 timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
-                print("timestamp " + timeStamps[timeStamps.Count - 3]);
-                print("timestamp " + timeStamps[timeStamps.Count - 1]);
+                //print("timestamp " + timeStamps[timeStamps.Count - 3]);
+                //print("timestamp " + timeStamps[timeStamps.Count - 1]);
             }
         }
     }
@@ -108,7 +108,7 @@ public class Lane : MonoBehaviour
                 {
                     if (HitCheck(nextTimeStamp, audioTime)) // hit note hold
                     {
-                        Hit(inputIndex); // hit note tap
+                        Hit(inputIndex, Math.Abs(nextTimeStamp - audioTime)); // hit note tap
                         inputIndex++;
                     }
                 }
@@ -131,8 +131,8 @@ public class Lane : MonoBehaviour
         if (Math.Abs(audioTime - timeStamp) < SongManager.Instance.marginOfError)
         {
             hit = true;
-            Hit(inputIndex);
-            print($"Hit on {inputIndex} note");
+            Hit(inputIndex, Math.Abs(audioTime - timeStamp));
+            print($"Hit on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
             inputIndex++;
         }
         else
@@ -141,9 +141,9 @@ public class Lane : MonoBehaviour
         }
         return hit;
     }
-    private void Hit(int index)
+    private void Hit(int index, double timing)
     {
-        ScoreManager.Hit();
+        ScoreManager.Hit(timing);
         notes[index].Hit();
     }
     private void Miss(int index)
