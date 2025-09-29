@@ -465,7 +465,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: bd87b666bbef3e8439bc86786b9d5d39, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tapNoteName: 7
   holdNoteName: 5
-  input: 274
+  input: 32
   notePrefab: {fileID: 6401272534080061571, guid: a043c4f729c0ef1429ea13081611a298, type: 3}
   noteHoldPrefab: {fileID: 4865490120552033602, guid: b3a6bfd0ab5b93a4ca3d1d60d470a278, type: 3}
 --- !u!4 &1441840088
@@ -833,7 +833,7 @@ Transform:
   m_GameObject: {fileID: 1441840086}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
