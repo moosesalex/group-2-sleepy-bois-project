@@ -13,6 +13,13 @@ public class NoteHold : Note
     {
         lineRenderer = GetComponent<LineRenderer>();
         timeInstantiated2 = SongManager.GetAudioSourceTime() + (assignedEndTime - assignedTime);
+
+        // Hold note look
+        lineRenderer.startWidth = 0.20f;
+        lineRenderer.endWidth = 0.20f;
+        lineRenderer.startColor = Color.magenta;
+        lineRenderer.endColor = Color.magenta;
+
     }
     public override void UpdateGameObject()
     {
