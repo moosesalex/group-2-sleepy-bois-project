@@ -682,6 +682,8 @@ MonoBehaviour:
   hitSFX: {fileID: 2076148785}
   missSFX: {fileID: 196697199}
   scoreText: {fileID: 18088341}
+  judgementText: {fileID: 1282635562}
+  fadeDuration: 1
 --- !u!4 &365741612
 Transform:
   m_ObjectHideFlags: 0
@@ -921,8 +923,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1130,9 +1132,9 @@ MonoBehaviour:
   songDelayInSeconds: 0
   marginOfError: 0.1
   inputDelayInMilliseconds: 0
-  fileLocation: test1.mid
-  noteTime: 1
-  noteSpawnY: 7
+  fileLocation: holdtest.mid
+  noteTime: 2
+  noteSpawnY: 17
   noteTapY: -3
   useNewAudioTime: 1
 --- !u!4 &1787680573

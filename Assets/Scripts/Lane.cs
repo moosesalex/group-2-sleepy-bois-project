@@ -90,8 +90,10 @@ public class Lane : MonoBehaviour
                     inputAction = Input.GetKeyDown(input);
                 }
 
+                // tap check
                 if (inputAction && timeStamp - marginOfError >= audioTime)
                 {
+                    Miss(inputIndex);
                     print($"Early missed {inputIndex} note");
                     inputIndex++;
                 }

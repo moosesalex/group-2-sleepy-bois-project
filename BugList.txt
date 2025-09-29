@@ -1,0 +1,4 @@
+Known Bugs/Issues:
+
+- If a note is within noteTime (currently 2 seconds. found in ScoreManager) of the start of the midi file, it will miss early. Make sure to have at least noteTime seconds of time before your first note.
+- If a hold note is longer than noteTime, there will be issues with the hit/miss system since the end note of it hasn't spawned yet.
