@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "SleepGame.sln"
+    "dotnet.defaultSolution": "group-2-sleepy-bois-project.sln"
 }
