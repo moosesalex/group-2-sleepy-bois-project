@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -20,14 +21,15 @@ public class ScoreManager : MonoBehaviour
     }
     public static void Hit(double timing)
     {
+        Instance.StopAllCoroutines();
         comboScore += 1;
         Instance.hitSFX.Play();
-        if (timing < 0.01)
+        if (timing < 0.02)
         {
             curJudgement = "Perfect";
             Instance.judgementText.color = Color.yellow;
         }
-        else if (timing < 0.03)
+        else if (timing < 0.04)
         {
             curJudgement = "Great";
             Instance.judgementText.color = Color.green;
@@ -44,6 +46,7 @@ public class ScoreManager : MonoBehaviour
     }
     public static void Miss()
     {
+        Instance.StopAllCoroutines();
         comboScore = 0;
         curJudgement = "Miss";
         Instance.missSFX.Play();
@@ -60,19 +63,7 @@ public class ScoreManager : MonoBehaviour
     
     IEnumerator FadeOutText()
     {
-        Color originalColor = judgementText.color;
-        originalColor.a = 1f;
-        float elapsed = 0f;
-
-        while (elapsed < fadeDuration)
-        {
-            elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
-            judgementText.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
-            yield return null;
-        }
-
-        // Ensure text is fully transparent at the end
-        judgementText.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+        yield return new WaitForSeconds(0.5f); 
+        judgementText.text = ""; 
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Lane : MonoBehaviour
 {
@@ -88,8 +89,17 @@ public class Lane : MonoBehaviour
                     // Tapping Key or Starting Button Hold
                     inputAction = Input.GetKeyDown(input);
                 }
-                    
-                if (inputAction)
+
+                // tap check
+                if (inputAction && timeStamp - marginOfError >= audioTime && !(audioTime <= timeStamp - marginOfError - 0.4))
+                {
+                    print(timeStamp);
+                    print(audioTime);
+                    Miss(inputIndex);
+                    print($"Early missed {inputIndex} note");
+                    inputIndex++;
+                }
+                else if (inputAction)
                 {
                     HitCheck(timeStamp, audioTime);
                 }
@@ -156,6 +166,9 @@ public class Lane : MonoBehaviour
     private void MissNote(int index)
     {
         if (notes[index] != null)
+        {
             notes[index].Miss();
+        }
+        
     }
 }
