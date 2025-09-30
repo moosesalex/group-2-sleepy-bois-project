@@ -91,8 +91,10 @@ public class Lane : MonoBehaviour
                 }
 
                 // tap check
-                if (inputAction && timeStamp - marginOfError >= audioTime)
+                if (inputAction && timeStamp - marginOfError >= audioTime && !(audioTime <= timeStamp - marginOfError - 0.4))
                 {
+                    print(timeStamp);
+                    print(audioTime);
                     Miss(inputIndex);
                     print($"Early missed {inputIndex} note");
                     inputIndex++;

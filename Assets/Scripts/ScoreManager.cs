@@ -72,8 +72,7 @@ public class ScoreManager : MonoBehaviour
             judgementText.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
             yield return null;
         }
-
-        // Ensure text is fully transparent at the end
+        
         judgementText.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
     }
 }
