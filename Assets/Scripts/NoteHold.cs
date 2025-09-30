@@ -7,8 +7,8 @@ public class NoteHold : Note
     public double assignedEndTime;
     public bool missed { get; set; } = false;
     public double timeInstantiated2 { get; set; }
-    public float t2 { get; set; }
     LineRenderer lineRenderer;
+    public float t2 { get; set; }
     public override void StartGameObject()
     {
         lineRenderer = GetComponent<LineRenderer>();

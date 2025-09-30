@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
     public AudioSource hitSFX;
     public AudioSource missSFX;
+    public AudioSource yawnSFX;
     public TMPro.TextMeshPro scoreText;
     public TMPro.TextMeshPro judgementText;
     public float fadeDuration = 1f;
@@ -60,7 +61,11 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = comboScore.ToString();
     }
-    
+    public static void Yawn()
+    {
+        Instance.yawnSFX.Play();
+    }
+
     IEnumerator FadeOutText()
     {
         yield return new WaitForSeconds(0.5f); 

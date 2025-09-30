@@ -9,14 +9,24 @@ public class Lane : MonoBehaviour
 {
     public Melanchall.DryWetMidi.MusicTheory.NoteName tapNoteName;
     public Melanchall.DryWetMidi.MusicTheory.NoteName holdNoteName;
+    public Melanchall.DryWetMidi.MusicTheory.NoteName closeNoteName;
+    private int tapNoteInt = 0;
+    private int holdStartNoteInt = 1;
+    private int holdMiddleNoteInt = 2;
+    private int holdEndNoteInt = 3;
     public KeyCode input;
     public GameObject notePrefab;
     public GameObject noteHoldPrefab;
+    public GameObject upperEye;
+    public GameObject lowerEye;
     List<Note> notes = new List<Note>();
     public List<double?> timeStamps = new List<double?>();
+    public List<int> noteTypes = new List<int>();
+    public List<double> eyesTimeStamps = new List<double>();
 
     int spawnIndex = 0;
     int inputIndex = 0;
+    int yawnIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,20 +37,33 @@ public class Lane : MonoBehaviour
     {
         foreach (var note in array)
         {
-            if (note.NoteName == tapNoteName || note.NoteName == holdNoteName)
+            //Calculate the time start and end of each note
+            var metricTimeSpanStart = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
+            var metricTimeSpanEnd = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time + note.Length, SongManager.midiFile.GetTempoMap());
+            double timeStart = (double)metricTimeSpanStart.Minutes * 60f + metricTimeSpanStart.Seconds + (double)metricTimeSpanStart.Milliseconds / 1000f;
+            double timeEnd = (double)metricTimeSpanEnd.Minutes * 60f + metricTimeSpanEnd.Seconds + (double)metricTimeSpanEnd.Milliseconds / 1000f;
+
+            //Add time stamps to arrays based on what kind of note it is
+            if (note.NoteName == tapNoteName)
             {
-                var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
-                timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
-                
+                timeStamps.Add(timeStart);
+                noteTypes.Add(tapNoteInt);
             }
-            if (note.NoteName == holdNoteName)
+            else if (note.NoteName == holdNoteName)
             {
-                timeStamps.Add(null);
-                var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time + note.Length, SongManager.midiFile.GetTempoMap());
-                timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
-                //print("timestamp " + timeStamps[timeStamps.Count - 3]);
-                //print("timestamp " + timeStamps[timeStamps.Count - 1]);
+                timeStamps.Add(timeStart);
+                noteTypes.Add(holdStartNoteInt);
+                timeStamps.Add(timeStart);
+                noteTypes.Add(holdMiddleNoteInt);
+                timeStamps.Add(timeEnd);
+                noteTypes.Add(holdEndNoteInt);
             }
+            else if (note.NoteName == closeNoteName)
+            {
+                eyesTimeStamps.Add(timeStart);
+                eyesTimeStamps.Add(timeEnd);
+            }
+           
         }
     }
     // Update is called once per frame
@@ -48,17 +71,19 @@ public class Lane : MonoBehaviour
     {
         if (spawnIndex < timeStamps.Count)
         {
-            double startTimeStamp = timeStamps[spawnIndex].HasValue ? timeStamps[spawnIndex].Value : timeStamps[spawnIndex - 1].Value;
+            double startTimeStamp = timeStamps[spawnIndex].Value;
             if (SongManager.GetAudioSourceTime() >= startTimeStamp - SongManager.Instance.noteTime)
             {
-                if (timeStamps[spawnIndex].HasValue)
+                int type = noteTypes[spawnIndex];
+                if (type == tapNoteInt || type == holdStartNoteInt || type == holdEndNoteInt)
                 {
                     var note = Instantiate(notePrefab, transform);
                     notes.Add(note.GetComponent<NoteTap>());
                     note.GetComponent<NoteTap>().assignedTime = (float)timeStamps[spawnIndex];
                 }
-                else
+                else if (type == holdMiddleNoteInt)
                 {
+                   
                     var noteHold = Instantiate(noteHoldPrefab, transform);
                     notes.Add(noteHold.GetComponent<NoteHold>());
                     noteHold.GetComponent<NoteHold>().assignedTime = (float)timeStamps[spawnIndex - 1];
@@ -67,71 +92,72 @@ public class Lane : MonoBehaviour
                 spawnIndex++;
             }
                 
-        } 
-
+        }
+        if (yawnIndex < eyesTimeStamps.Count)
+        {
+            double startTimeStamp = eyesTimeStamps[yawnIndex];
+            if (SongManager.GetAudioSourceTime() >= startTimeStamp - SongManager.Instance.noteTime)
+            {
+                ScoreManager.Yawn();
+                double delay = ((double)timeStamps[spawnIndex + 1]) - ((double)timeStamps[spawnIndex]);
+                upperEye.GetComponent<EyeController>().CloseEye(delay);
+                lowerEye.GetComponent<EyeController>().CloseEye(delay);
+                yawnIndex += 2;
+            }
+        }
         if (inputIndex < timeStamps.Count)
         {
             double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000.0);
 
-            if (timeStamps[inputIndex].HasValue)
+            if (noteTypes[inputIndex] == tapNoteInt || noteTypes[inputIndex] == holdStartNoteInt)
             {
                 double timeStamp = timeStamps[inputIndex].Value;
                 double marginOfError = SongManager.Instance.marginOfError;
+                bool inputAction = Input.GetKeyDown(input);
 
-                bool inputAction = false;
-                if (inputIndex != 0 && !timeStamps[inputIndex].HasValue)
+                // TODO
+                if(noteTypes[inputIndex] == holdEndNoteInt)
                 {
-                    // Releasing Key From Button Hold
                     inputAction = Input.GetKeyUp(input);
                 }
-                else
-                {
-                    // Tapping Key or Starting Button Hold
-                    inputAction = Input.GetKeyDown(input);
-                }
 
-                // tap check
-                if (inputAction && timeStamp - marginOfError >= audioTime && !(audioTime <= timeStamp - marginOfError - 0.4))
-                {
-                    print(timeStamp);
-                    print(audioTime);
-                    Miss(inputIndex);
-                    print($"Early missed {inputIndex} note");
-                    inputIndex++;
-                }
-                else if (inputAction)
+                if (inputAction && !(audioTime <= timeStamp - marginOfError - 0.2))
                 {
                     HitCheck(timeStamp, audioTime);
                 }
-                if (timeStamp + marginOfError <= audioTime)
+                else if (timeStamp + SongManager.Instance.marginOfError <= audioTime)
                 {
                     Miss(inputIndex);
-                    print($"Missed {inputIndex} note");
                     inputIndex++;
                 }
             }
-            else
+            else if(noteTypes[inputIndex] == holdMiddleNoteInt)
             {
-                double nextTimeStamp = timeStamps[inputIndex + 1].Value;
+                double nextTimeStamp = timeStamps[inputIndex+1].Value;
                 
                 if (Input.GetKeyUp(input))
                 {
-                    if (HitCheck(nextTimeStamp, audioTime)) // hit note hold
+                    inputIndex++;
+                    if (!HitCheck(nextTimeStamp, audioTime))
                     {
-                        Hit(inputIndex, Math.Abs(nextTimeStamp - audioTime)); // hit note tap
-                        inputIndex++;
+                        Miss(inputIndex-1);
                     }
+
                 }
                 else if (!Input.GetKey(input))
                 {
-                    notes[inputIndex].Miss();
-                    notes[inputIndex + 1].Miss();
+                    Miss(inputIndex);
+                    Miss(inputIndex + 1);
                     inputIndex += 2;
                 }
                 else if (nextTimeStamp + SongManager.Instance.marginOfError <= audioTime)
                 {
                     inputIndex += 2;
                 }
+            }
+            else
+            {
+                inputIndex++;
             }
         }       
     }
@@ -143,12 +169,14 @@ public class Lane : MonoBehaviour
             hit = true;
             Hit(inputIndex, Math.Abs(audioTime - timeStamp));
             print($"Hit on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
-            inputIndex++;
+            
         }
         else
         {
             print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
+            Miss(inputIndex);
         }
+        inputIndex++;
         return hit;
     }
     private void Hit(int index, double timing)
@@ -158,17 +186,9 @@ public class Lane : MonoBehaviour
     }
     private void Miss(int index)
     {
-        MissNote(index);
-        if (index - 1 >= 0 && !timeStamps[index - 1].HasValue) MissNote(index - 2);
-        if (index + 1 < timeStamps.Count && !timeStamps[index + 1].HasValue) MissNote(index + 2);
-        ScoreManager.Miss();
-    }
-    private void MissNote(int index)
-    {
         if (notes[index] != null)
         {
             notes[index].Miss();
         }
-        
     }
 }
