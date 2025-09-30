@@ -238,6 +238,7 @@ public class TimeManager : MonoBehaviour
 
     public void Play()
     {
+        ResetTime();
         isPlaying = true;
         musicSource.Play();
         isPaused = false;
