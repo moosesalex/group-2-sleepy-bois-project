@@ -2,3 +2,5 @@ Known Bugs/Issues:
 
 - If a note is within noteTime (currently 2 seconds. found in ScoreManager) of the start of the midi file, it will miss early. Make sure to have at least noteTime seconds of time before your first note.
 - If a hold note is longer than noteTime, there will be issues with the hit/miss system since the end note of it hasn't spawned yet.
+
+- Checking use new audiotime in songMaanger makes gameplay more fluid but completely breaks the start/stop for the songs. If it could be figured out how to fix that it would be great but I don't think we need to.
