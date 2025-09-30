@@ -239,7 +239,20 @@ public class TimeManager : MonoBehaviour
     public void Play()
     {
         isPlaying = true;
+        musicSource.Play();
         isPaused = false;
+    }
+
+    public void ResetTime()
+    {
+        isPlaying = false;
+        isPaused = false;
+        audioStartTime = 0;
+        currentTime = -preStartTime;
+        sourceStartTime = 0;
+        audioHasBeenScheduled = false;
+        audioDspScheduledTime = 0.0;
+        firstDspTime = AudioSettings.dspTime;
     }
 
     private double sourceStartTime;

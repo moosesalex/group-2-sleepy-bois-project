@@ -25,12 +25,12 @@ public class ScoreManager : MonoBehaviour
         Instance.StopAllCoroutines();
         comboScore += 1;
         Instance.hitSFX.Play();
-        if (timing < 0.02)
+        if (timing < 0.03)
         {
             curJudgement = "Perfect";
             Instance.judgementText.color = Color.yellow;
         }
-        else if (timing < 0.04)
+        else if (timing < 0.05)
         {
             curJudgement = "Great";
             Instance.judgementText.color = Color.green;
@@ -64,6 +64,11 @@ public class ScoreManager : MonoBehaviour
     public static void Yawn()
     {
         Instance.yawnSFX.Play();
+    }
+
+    public void ResetCombo()
+    {
+        comboScore = 0;
     }
 
     IEnumerator FadeOutText()

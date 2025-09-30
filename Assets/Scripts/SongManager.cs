@@ -10,6 +10,7 @@ using System;
 public class SongManager : MonoBehaviour
 {
     public static SongManager Instance;
+    public ScoreManager scoreManager;
     public AudioSource audioSource;
     public TimeManager timeManager;
     public Lane[] lanes;
@@ -32,45 +33,45 @@ public class SongManager : MonoBehaviour
     }
     public bool useNewAudioTime;
     public static MidiFile midiFile;
+    public bool isSongPlaying = false;
+    public string midiFileName;
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
-        if (Application.streamingAssetsPath.StartsWith("http://") || Application.streamingAssetsPath.StartsWith("https://"))
+    }
+
+    public void StartChart()
+    {
+        if (!isSongPlaying)
         {
-            StartCoroutine(ReadFromWebsite());
-        }
-        else
-        {
-            ReadFromFile();
+            isSongPlaying = true;
+            ReadFromFile(midiFileName);
         }
     }
 
-    private IEnumerator ReadFromWebsite()
+    public void ExitChart(bool endedEarly = true)
     {
-        using (UnityWebRequest www = UnityWebRequest.Get(Application.streamingAssetsPath + "/" + fileLocation))
-        {
-            yield return www.SendWebRequest();
+        isSongPlaying = false;
 
-            if (www.isNetworkError || www.isHttpError)
-            {
-                Debug.LogError(www.error);
-            }
-            else
-            {
-                byte[] results = www.downloadHandler.data;
-                using (var stream = new MemoryStream(results))
-                {
-                    midiFile = MidiFile.Read(stream);
-                    GetDataFromMidi();
-                }
-            }
+        if (endedEarly)
+        {
+            StopCoroutine(CheckIfAudioFinished());
+            audioSource.Stop();
         }
+
+        foreach (var lane in lanes)
+        {
+            lane.ClearNotes();
+        }
+
+        scoreManager.ResetCombo();
+        audioSource.time = 0;
     }
 
-    private void ReadFromFile()
+    private void ReadFromFile(string fileName)
     {
-        midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + fileLocation);
+        midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + fileName);
         GetDataFromMidi();
     }
     public void GetDataFromMidi()
@@ -86,9 +87,15 @@ public class SongManager : MonoBehaviour
     public void StartSong()
     {
         if (Instance.useNewAudioTime)
+        {
             timeManager.Play();
-        else 
-            audioSource.Play();
+            StartCoroutine(CheckIfAudioFinished());
+        }
+        else
+        {
+            audioSource.Play(); 
+            StartCoroutine(CheckIfAudioFinished());
+        }     
     }
     public static double GetAudioSourceTime()
     {
@@ -102,8 +109,19 @@ public class SongManager : MonoBehaviour
         }
     }
 
-    void Update()
+    /// <summary>
+    /// Continuously checks if the song is finished, then calls ExitChart(false);
+    /// </summary>
+    IEnumerator CheckIfAudioFinished()
     {
-        
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        if(isSongPlaying)
+        {
+            ExitChart(false);
+        }
     }
 }

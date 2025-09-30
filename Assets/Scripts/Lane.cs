@@ -63,7 +63,6 @@ public class Lane : MonoBehaviour
                 eyesTimeStamps.Add(timeStart);
                 eyesTimeStamps.Add(timeEnd);
             }
-           
         }
     }
     // Update is called once per frame
@@ -83,7 +82,7 @@ public class Lane : MonoBehaviour
                 }
                 else if (type == holdMiddleNoteInt)
                 {
-                   
+
                     var noteHold = Instantiate(noteHoldPrefab, transform);
                     notes.Add(noteHold.GetComponent<NoteHold>());
                     noteHold.GetComponent<NoteHold>().assignedTime = (float)timeStamps[spawnIndex - 1];
@@ -179,6 +178,27 @@ public class Lane : MonoBehaviour
         inputIndex++;
         return hit;
     }
+
+    public void ClearNotes()
+    {
+        foreach (var note in notes)
+        {
+            if (note != null)
+            {
+                Destroy(note.gameObject);
+            }
+        }
+
+        notes.Clear();
+        timeStamps.Clear();
+        noteTypes.Clear();
+        eyesTimeStamps.Clear();
+
+        spawnIndex = 0;
+        inputIndex = 0;
+        yawnIndex = 0;
+    }
+
     private void Hit(int index, double timing)
     {
         ScoreManager.Hit(timing);
