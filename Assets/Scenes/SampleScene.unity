@@ -1132,7 +1132,7 @@ MonoBehaviour:
   songDelayInSeconds: 0
   marginOfError: 0.1
   inputDelayInMilliseconds: 0
-  fileLocation: holdtest.mid
+  fileLocation: example.mid
   noteTime: 2
   noteSpawnY: 17
   noteTapY: -3
