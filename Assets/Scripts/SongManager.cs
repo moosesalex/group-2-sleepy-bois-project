@@ -19,8 +19,6 @@ public class SongManager : MonoBehaviour
 
     public int inputDelayInMilliseconds;
     
-
-    public string fileLocation;
     public float noteTime;
     public float noteSpawnY;
     public float noteTapY;
@@ -43,6 +41,7 @@ public class SongManager : MonoBehaviour
 
     public void StartChart()
     {
+        print(midiFileName);
         if (!isSongPlaying)
         {
             isSongPlaying = true;
