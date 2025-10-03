@@ -204,8 +204,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633675053}
   m_HandleRect: {fileID: 633675052}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.6666667
+  m_Value: -0.000007171631
+  m_Size: 0.6653489
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2900,7 +2900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 100.00001}
+  m_AnchoredPosition: {x: 0, y: 100.0007}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &947986990
@@ -4271,6 +4271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381b25e402e568245ac0630b975b1342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI: {fileID: 2030516618}
   scoreManager: {fileID: 365741611}
   audioSource: {fileID: 285913766}
   timeManager: {fileID: 285913765}
@@ -4419,13 +4420,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songManager: {fileID: 1787680572}
   timeManager: {fileID: 285913765}
+  maxCompletedIndex: 4
   currLobbyMusic: {fileID: 0}
+  currentSongIndex: 0
   audioClips:
   - {fileID: 8300000, guid: ad346713b39f44c52b9742cdd725cdc0, type: 3}
   - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
   buttons:
   - {fileID: 473316814}
   - {fileID: 124501166}
+  - {fileID: 890684279}
+  - {fileID: 37203024}
+  - {fileID: 1226440601}
   songMidiNames:
   - BetaTest2.mid
   - example.mid

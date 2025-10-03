@@ -10,6 +10,7 @@ using System;
 public class SongManager : MonoBehaviour
 {
     public static SongManager Instance;
+    public UIScript UI;
     public ScoreManager scoreManager;
     public AudioSource audioSource;
     public TimeManager timeManager;
@@ -118,8 +119,12 @@ public class SongManager : MonoBehaviour
             yield return null;
         }
 
-        if(isSongPlaying)
+        if (isSongPlaying)
         {
+            if (UI.currentSongIndex > UI.maxCompletedIndex)
+            {
+                UI.maxCompletedIndex = UI.currentSongIndex;
+            }
             ExitChart(false);
         }
     }

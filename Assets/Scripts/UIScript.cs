@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,11 +15,14 @@ public class UIScript : MonoBehaviour
 
     private Button selectedButton;
     private bool isSelectionDefault = true;
+    public int maxCompletedIndex = 4;
 
     public static AudioSource lobbyMusic;
     public AudioSource currLobbyMusic;
 
     private AudioSource timeAudio;
+
+    public int currentSongIndex = 0;
 
     public List<AudioClip> audioClips;
     [SerializeField] private Button[] buttons;
@@ -25,6 +30,11 @@ public class UIScript : MonoBehaviour
     [SerializeField] private List<float> songLobbyDelays;
     //[SerializeField] private List<int> songSpeeds;
 
+    public void Awake()
+    {
+        // TODO REMOVE THIS FUNCTION WHEN WE KNOW EVERYTHING WORKS
+        UpdateButtons();
+    }
     public void Play()
     {
         if (!songManager.isSongPlaying)
@@ -38,19 +48,42 @@ public class UIScript : MonoBehaviour
         songManager.ExitChart();
     }
 
+    public void UpdateButtons()
+    {
+        if (maxCompletedIndex == 4)
+        {
+            buttons[4].GetComponentInChildren<TextMeshProUGUI>().text = "Level 5";
+        }
+        if (maxCompletedIndex >= 3)
+        {
+            buttons[3].GetComponentInChildren<TextMeshProUGUI>().text = "Level 4";
+        }
+        if (maxCompletedIndex >= 2)
+        {
+            buttons[2].GetComponentInChildren<TextMeshProUGUI>().text = "Level 3";
+        }
+        if (maxCompletedIndex >= 1)
+        {
+            buttons[1].GetComponentInChildren<TextMeshProUGUI>().text = "Level 2";
+        }
+        if (maxCompletedIndex >= 0)
+        {
+            buttons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Level 1";
+        }
+    }
+
     public void SwitchSongAndChart(Button pressedButton)
     {
-        if (!songManager.isSongPlaying)
+        int index = Array.IndexOf(buttons, pressedButton);
+        if (!songManager.isSongPlaying && (index <= maxCompletedIndex))
         {
             if (selectedButton != null)
             {
                 DeselectButton(selectedButton);
             }
-
+            currentSongIndex = index;
             SelectButton(pressedButton);
             selectedButton = pressedButton;
-
-            int index = Array.IndexOf(buttons, pressedButton);
 
             isSelectionDefault = false;
 
