@@ -7,9 +7,12 @@ using UnityEngine.UIElements;
 
 public class Lane : MonoBehaviour
 {
-    public Melanchall.DryWetMidi.MusicTheory.NoteName tapNoteName;
-    public Melanchall.DryWetMidi.MusicTheory.NoteName holdNoteName;
-    public Melanchall.DryWetMidi.MusicTheory.NoteName closeNoteName;
+    public Melanchall.DryWetMidi.MusicTheory.NoteName headphoneNoteName;
+    public Melanchall.DryWetMidi.MusicTheory.NoteName hugNoteName;
+    public Melanchall.DryWetMidi.MusicTheory.NoteName coverNoteName;
+    public Melanchall.DryWetMidi.MusicTheory.NoteName snoreNoteName;
+    public Melanchall.DryWetMidi.MusicTheory.NoteName kickNoteName;
+    public Melanchall.DryWetMidi.MusicTheory.NoteName eyesNoteName;
     private int tapNoteInt = 0;
     private int holdStartNoteInt = 1;
     private int holdMiddleNoteInt = 2;
@@ -23,7 +26,7 @@ public class Lane : MonoBehaviour
     public List<double?> timeStamps = new List<double?>();
     public List<int> noteTypes = new List<int>();
     public List<double> eyesTimeStamps = new List<double>();
-
+    public List<int> noteSounds = new List<int>();
     int spawnIndex = 0;
     int inputIndex = 0;
     int yawnIndex = 0;
@@ -44,21 +47,58 @@ public class Lane : MonoBehaviour
             double timeEnd = (double)metricTimeSpanEnd.Minutes * 60f + metricTimeSpanEnd.Seconds + (double)metricTimeSpanEnd.Milliseconds / 1000f;
 
             //Add time stamps to arrays based on what kind of note it is
-            if (note.NoteName == tapNoteName)
+            if (note.NoteName == hugNoteName)
             {
                 timeStamps.Add(timeStart);
                 noteTypes.Add(tapNoteInt);
+                noteSounds.Add(2);
             }
-            else if (note.NoteName == holdNoteName)
+            else if (note.NoteName == kickNoteName)
             {
                 timeStamps.Add(timeStart);
+                noteTypes.Add(tapNoteInt);
+                noteSounds.Add(5);
+            }
+            else if (note.NoteName == headphoneNoteName)
+            {
+                int noteSoundNumber = 1;
+                timeStamps.Add(timeStart);
                 noteTypes.Add(holdStartNoteInt);
+                noteSounds.Add(noteSoundNumber);
                 timeStamps.Add(timeStart);
                 noteTypes.Add(holdMiddleNoteInt);
+                noteSounds.Add(noteSoundNumber);
                 timeStamps.Add(timeEnd);
                 noteTypes.Add(holdEndNoteInt);
+                noteSounds.Add(noteSoundNumber);
             }
-            else if (note.NoteName == closeNoteName)
+            else if (note.NoteName == coverNoteName)
+            {
+                int noteSoundNumber = 3;
+                timeStamps.Add(timeStart);
+                noteTypes.Add(holdStartNoteInt);
+                noteSounds.Add(noteSoundNumber);
+                timeStamps.Add(timeStart);
+                noteTypes.Add(holdMiddleNoteInt);
+                noteSounds.Add(noteSoundNumber);
+                timeStamps.Add(timeEnd);
+                noteTypes.Add(holdEndNoteInt);
+                noteSounds.Add(noteSoundNumber);
+            }
+            else if (note.NoteName == snoreNoteName)
+            {
+                int noteSoundNumber = 4;
+                timeStamps.Add(timeStart);
+                noteTypes.Add(holdStartNoteInt);
+                noteSounds.Add(noteSoundNumber);
+                timeStamps.Add(timeStart);
+                noteTypes.Add(holdMiddleNoteInt);
+                noteSounds.Add(noteSoundNumber);
+                timeStamps.Add(timeEnd);
+                noteTypes.Add(holdEndNoteInt);
+                noteSounds.Add(noteSoundNumber);
+            }
+            else if (note.NoteName == eyesNoteName)
             {
                 eyesTimeStamps.Add(timeStart);
                 eyesTimeStamps.Add(timeEnd);
@@ -128,6 +168,10 @@ public class Lane : MonoBehaviour
                 {
                     Miss(inputIndex);
                     inputIndex++;
+                }
+                else if (inputAction)
+                {
+                    ScoreManager.Miss();
                 }
             }
             else if(noteTypes[inputIndex] == holdMiddleNoteInt)
@@ -201,7 +245,7 @@ public class Lane : MonoBehaviour
 
     private void Hit(int index, double timing)
     {
-        ScoreManager.Hit(timing);
+        ScoreManager.Hit(timing, noteSounds[index]);
         notes[index].Hit();
     }
     private void Miss(int index)
@@ -210,5 +254,6 @@ public class Lane : MonoBehaviour
         {
             notes[index].Miss();
         }
+        ScoreManager.Miss();
     }
 }

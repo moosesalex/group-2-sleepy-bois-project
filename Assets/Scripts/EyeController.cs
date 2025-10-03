@@ -5,6 +5,7 @@ public class EyeController : MonoBehaviour
 {
     public Vector3 startingPos;
     public Vector3 endingPos;
+    public static bool eyesClosed = false;
     public float speed;
     private bool isClosing;
     private bool isOpening;
@@ -23,6 +24,7 @@ public class EyeController : MonoBehaviour
 
     public void CloseEye(double inputDelay)
     {
+        eyesClosed = true;
         isClosing = true;
         timeInstantiated = SongManager.GetAudioSourceTime() + delay;
         delay = inputDelay;
@@ -58,6 +60,7 @@ public class EyeController : MonoBehaviour
             if(transform.position == startingPos)
             {
                 isOpening = false;
+                eyesClosed = false;
             }
         }
 

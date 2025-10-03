@@ -9,6 +9,11 @@ public class ScoreManager : MonoBehaviour
     public AudioSource hitSFX;
     public AudioSource missSFX;
     public AudioSource yawnSFX;
+    public AudioSource headphoneSFX;
+    public AudioSource hugSFX;
+    public AudioSource coverSFX;
+    public AudioSource snoreSFX;
+    public AudioSource kickSFX;
     public TMPro.TextMeshPro scoreText;
     public TMPro.TextMeshPro judgementText;
     public float fadeDuration = 1f;
@@ -20,12 +25,35 @@ public class ScoreManager : MonoBehaviour
         comboScore = 0;
         curJudgement = "";
     }
-    public static void Hit(double timing)
+    public static void Hit(double timing, int sound)
     {
         Instance.StopAllCoroutines();
         comboScore += 1;
-        Instance.hitSFX.Play();
-        if (timing < 0.03)
+
+        switch (sound)
+        {
+            case 1:
+                Instance.headphoneSFX.Play();
+                break;
+            case 2:
+                Instance.hugSFX.Play();
+                break;
+            case 3:
+                Instance.coverSFX.Play();
+                break;
+            case 4:
+                Instance.snoreSFX.Play();
+                break;
+            case 5:
+                Instance.kickSFX.Play();
+                break;
+            case 0:
+                Instance.hitSFX.Play();
+                break;
+        }
+        
+
+        if (timing < 0.03 || EyeController.eyesClosed)
         {
             curJudgement = "Perfect";
             Instance.judgementText.color = Color.yellow;
