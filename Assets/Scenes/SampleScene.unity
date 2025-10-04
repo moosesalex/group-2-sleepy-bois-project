@@ -204,8 +204,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633675053}
   m_HandleRect: {fileID: 633675052}
   m_Direction: 2
-  m_Value: -0.000007171631
-  m_Size: 0.6653489
+  m_Value: -0.000008544922
+  m_Size: 0.6666667
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -538,7 +538,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &18088343
 RectTransform:
@@ -1506,6 +1506,11 @@ MonoBehaviour:
   hitSFX: {fileID: 2076148785}
   missSFX: {fileID: 196697199}
   yawnSFX: {fileID: 1112048778}
+  headphoneSFX: {fileID: 0}
+  hugSFX: {fileID: 0}
+  coverSFX: {fileID: 0}
+  snoreSFX: {fileID: 0}
+  kickSFX: {fileID: 0}
   scoreText: {fileID: 18088341}
   judgementText: {fileID: 1282635562}
   fadeDuration: 1
@@ -2900,7 +2905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 100.0007}
+  m_AnchoredPosition: {x: 0, y: 100.00085}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &947986990
@@ -3764,7 +3769,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3842,7 +3847,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!224 &1282635564
 RectTransform:
@@ -3860,7 +3865,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.2388, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 3.0708, y: 1.2823}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1360874820
@@ -4149,9 +4154,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e14d6414030f54c8c1c6667d220fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tapNoteName: 7
-  holdNoteName: 5
-  closeNoteName: 2
+  headphoneNoteName: 9
+  hugNoteName: 7
+  coverNoteName: 5
+  snoreNoteName: 4
+  kickNoteName: 2
+  eyesNoteName: 0
   input: 32
   notePrefab: {fileID: 6401272534080061571, guid: a043c4f729c0ef1429ea13081611a298, type: 3}
   noteHoldPrefab: {fileID: 4865490120552033602, guid: b3a6bfd0ab5b93a4ca3d1d60d470a278, type: 3}
@@ -4159,6 +4167,7 @@ MonoBehaviour:
   lowerEye: {fileID: 859294774}
   noteTypes: 
   eyesTimeStamps: []
+  noteSounds: 
 --- !u!4 &1441840088
 Transform:
   m_ObjectHideFlags: 0

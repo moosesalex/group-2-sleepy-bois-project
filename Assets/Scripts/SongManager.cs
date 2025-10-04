@@ -42,7 +42,6 @@ public class SongManager : MonoBehaviour
 
     public void StartChart()
     {
-        print(midiFileName);
         if (!isSongPlaying)
         {
             isSongPlaying = true;

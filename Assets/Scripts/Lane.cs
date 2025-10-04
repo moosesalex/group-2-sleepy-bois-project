@@ -212,7 +212,6 @@ public class Lane : MonoBehaviour
             hit = true;
             Hit(inputIndex, Math.Abs(audioTime - timeStamp));
             print($"Hit on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
-            
         }
         else
         {

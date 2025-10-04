@@ -29,12 +29,6 @@ public class UIScript : MonoBehaviour
     [SerializeField] private List<String> songMidiNames;
     [SerializeField] private List<float> songLobbyDelays;
     //[SerializeField] private List<int> songSpeeds;
-
-    public void Awake()
-    {
-        // TODO REMOVE THIS FUNCTION WHEN WE KNOW EVERYTHING WORKS
-        UpdateButtons();
-    }
     public void Play()
     {
         if (!songManager.isSongPlaying)
@@ -50,6 +44,10 @@ public class UIScript : MonoBehaviour
 
     public void UpdateButtons()
     {
+        if (maxCompletedIndex == 5)
+        {
+            buttons[5].GetComponentInChildren<TextMeshProUGUI>().text = "CHALLENGE";
+        }
         if (maxCompletedIndex == 4)
         {
             buttons[4].GetComponentInChildren<TextMeshProUGUI>().text = "Level 5";

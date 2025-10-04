@@ -30,6 +30,8 @@ public class ScoreManager : MonoBehaviour
         Instance.StopAllCoroutines();
         comboScore += 1;
 
+        /*
+
         switch (sound)
         {
             case 1:
@@ -52,6 +54,7 @@ public class ScoreManager : MonoBehaviour
                 break;
         }
         
+        */
 
         if (timing < 0.03 || EyeController.eyesClosed)
         {
