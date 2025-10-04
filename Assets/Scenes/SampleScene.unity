@@ -204,8 +204,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633675053}
   m_HandleRect: {fileID: 633675052}
   m_Direction: 2
-  m_Value: -0.00000015258789
-  m_Size: 0.6666667
+  m_Value: -0.000007171633
+  m_Size: 0.66237867
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2905,7 +2905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 100.000015}
+  m_AnchoredPosition: {x: 0, y: 100.00072}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &947986990
@@ -4158,8 +4158,8 @@ MonoBehaviour:
   hugNoteName: 7
   coverNoteName: 5
   snoreNoteName: 4
-  kickNoteName: 2
-  eyesNoteName: 0
+  kickNoteName: 0
+  eyesNoteName: 2
   input: 32
   notePrefab: {fileID: 6401272534080061571, guid: a043c4f729c0ef1429ea13081611a298, type: 3}
   noteHoldPrefab: {fileID: 4865490120552033602, guid: b3a6bfd0ab5b93a4ca3d1d60d470a278, type: 3}
@@ -4289,6 +4289,7 @@ MonoBehaviour:
   songDelayInSeconds: 0
   marginOfError: 0.1
   inputDelayInMilliseconds: 0
+  notesInSong: 0
   noteTime: 2
   noteSpawnY: 17
   noteTapY: -3

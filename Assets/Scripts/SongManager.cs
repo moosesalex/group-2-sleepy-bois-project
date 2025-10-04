@@ -19,6 +19,9 @@ public class SongManager : MonoBehaviour
     public double marginOfError; // in seconds
 
     public int inputDelayInMilliseconds;
+
+    public int notesInSong;
+    public static float scorePerNote;
     
     public float noteTime;
     public float noteSpawnY;
@@ -76,6 +79,10 @@ public class SongManager : MonoBehaviour
     public void GetDataFromMidi()
     {
         var notes = midiFile.GetNotes();
+
+        notesInSong = notes.Count;
+        scorePerNote = 1_000_000f / notesInSong;
+
         var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
         notes.CopyTo(array, 0);
 

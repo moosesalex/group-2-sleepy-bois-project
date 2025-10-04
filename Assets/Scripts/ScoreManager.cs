@@ -17,8 +17,14 @@ public class ScoreManager : MonoBehaviour
     public TMPro.TextMeshPro scoreText;
     public TMPro.TextMeshPro judgementText;
     public float fadeDuration = 1f;
-    static int comboScore;
+    static float comboScore;
     static string curJudgement;
+
+    private const float PERFECT_MULT = 1.0f;
+    private const float GREAT_MULT = 0.85f;
+    private const float GOOD_MULT = 0.65f;
+    private const float MISS_MULT= 0.0f;
+
     void Start()
     {
         Instance = this;
@@ -28,8 +34,6 @@ public class ScoreManager : MonoBehaviour
     public static void Hit(double timing, int sound)
     {
         Instance.StopAllCoroutines();
-        comboScore += 1;
-
         /*
 
         switch (sound)
@@ -60,16 +64,19 @@ public class ScoreManager : MonoBehaviour
         {
             curJudgement = "Perfect";
             Instance.judgementText.color = Color.yellow;
+            comboScore += SongManager.scorePerNote * PERFECT_MULT;
         }
         else if (timing < 0.05)
         {
             curJudgement = "Great";
             Instance.judgementText.color = Color.green;
+            comboScore += SongManager.scorePerNote * GREAT_MULT;
         }
         else
         {
             curJudgement = "Good";
             Instance.judgementText.color = Color.blue;
+            comboScore += SongManager.scorePerNote * GOOD_MULT;
         }
 
         Instance.judgementText.text = curJudgement;
@@ -90,7 +97,7 @@ public class ScoreManager : MonoBehaviour
     }
     private void Update()
     {
-        scoreText.text = comboScore.ToString();
+        scoreText.text = Mathf.RoundToInt(comboScore).ToString();
     }
     public static void Yawn()
     {
