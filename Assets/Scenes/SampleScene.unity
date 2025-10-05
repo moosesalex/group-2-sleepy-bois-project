@@ -204,8 +204,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633675053}
   m_HandleRect: {fileID: 633675052}
   m_Direction: 2
-  m_Value: 0.00000015258789
-  m_Size: 0.6666667
+  m_Value: -0.0000013732914
+  m_Size: 0.66666675
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3248,7 +3248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 99.999985}
+  m_AnchoredPosition: {x: 0, y: 100.00013}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &947986990
@@ -5318,7 +5318,10 @@ MonoBehaviour:
   currLobbyMusic: {fileID: 0}
   currentSongIndex: 0
   audioClips:
-  - {fileID: 8300000, guid: ac9c267c18b8aa3439edd16c2fe6b928, type: 3}
+  - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
+  - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
+  - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
+  - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
   - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
   buttons:
   - {fileID: 473316814}
@@ -5327,8 +5330,11 @@ MonoBehaviour:
   - {fileID: 37203024}
   - {fileID: 1226440601}
   songMidiNames:
-  - example.mid
-  - example.mid
+  - Level1Tut.mid
+  - Lv2_.mid
+  - Lv3_.mid
+  - Lv4_.mid
+  - Lv5_.mid
   songLobbyDelays: []
 --- !u!1 &2051446799
 GameObject:

@@ -86,7 +86,7 @@ public class SongManager : MonoBehaviour
     {
         var notes = midiFile.GetNotes();
 
-        char[] lettersToCheck = { 'G', 'C' };
+        char[] lettersToCheck = { 'G', 'D' };
         notesInSong = notes.Count;
         
         foreach (Melanchall.DryWetMidi.Interaction.Note note in notes)
@@ -94,7 +94,7 @@ public class SongManager : MonoBehaviour
             if (!note.NoteName.ToString().Any(c => lettersToCheck.Contains(c)))
             {
                 notesInSong += 1;
-                if (note.NoteName.ToString().Contains("D"))
+                if (note.NoteName.ToString().Contains("C"))
                 {
                     notesInSong -= 3;
                 }
