@@ -167,11 +167,12 @@ public class Lane : MonoBehaviour
                 else if (timeStamp + SongManager.Instance.marginOfError <= audioTime)
                 {
                     Miss(inputIndex);
+                    if (noteTypes[inputIndex] == holdStartNoteInt)
+                    {
+                        Miss(inputIndex + 1);
+                        inputIndex++;
+                    }
                     inputIndex++;
-                }
-                else if (inputAction)
-                {
-                    ScoreManager.Miss();
                 }
             }
             else if(noteTypes[inputIndex] == holdMiddleNoteInt)
