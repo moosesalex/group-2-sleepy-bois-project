@@ -6,6 +6,7 @@ using Melanchall.DryWetMidi.Interaction;
 using System.IO;
 using UnityEngine.Networking;
 using System;
+using System.Linq;
 
 public class SongManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SongManager : MonoBehaviour
     public ScoreManager scoreManager;
     public AudioSource audioSource;
     public TimeManager timeManager;
+    public ResultsUIScript resultsUI;
     public Lane[] lanes;
     public float songDelayInSeconds;
     public double marginOfError; // in seconds
@@ -62,6 +64,10 @@ public class SongManager : MonoBehaviour
             audioSource.Stop();
         }
 
+        resultsUI.SetVals();
+        resultsUI.ShowResults();
+
+
         foreach (var lane in lanes)
         {
             lane.ClearNotes();
@@ -80,7 +86,21 @@ public class SongManager : MonoBehaviour
     {
         var notes = midiFile.GetNotes();
 
+        char[] lettersToCheck = { 'G', 'C' };
         notesInSong = notes.Count;
+        
+        foreach (Melanchall.DryWetMidi.Interaction.Note note in notes)
+        {
+            if (!note.NoteName.ToString().Any(c => lettersToCheck.Contains(c)))
+            {
+                notesInSong += 1;
+                if (note.NoteName.ToString().Contains("D"))
+                {
+                    notesInSong -= 3;
+                }
+            }
+        }
+
         scorePerNote = 1_000_000f / notesInSong;
 
         var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
@@ -125,13 +145,12 @@ public class SongManager : MonoBehaviour
             yield return null;
         }
 
-        if (isSongPlaying)
+
+        if (UI.currentSongIndex >= UI.maxCompletedIndex)
         {
-            if (UI.currentSongIndex > UI.maxCompletedIndex)
-            {
-                UI.maxCompletedIndex = UI.currentSongIndex;
-            }
-            ExitChart(false);
+            UI.maxCompletedIndex = UI.currentSongIndex;
         }
+        UI.UpdateButtons();
+        ExitChart(false);
     }
 }

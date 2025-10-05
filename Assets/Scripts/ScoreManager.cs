@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
     public TMPro.TextMeshPro scoreText;
     public TMPro.TextMeshPro judgementText;
     public float fadeDuration = 1f;
-    static float comboScore;
+    public static float comboScore;
     static string curJudgement;
 
     private const float PERFECT_MULT = 1.0f;
@@ -86,7 +86,6 @@ public class ScoreManager : MonoBehaviour
     public static void Miss()
     {
         Instance.StopAllCoroutines();
-        comboScore = 0;
         curJudgement = "Miss";
         Instance.missSFX.Play();
 
