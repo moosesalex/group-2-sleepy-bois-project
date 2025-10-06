@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
     {
         Instance.StopAllCoroutines();
         
-
+        /*
         switch (sound)
         {
             case 1:
@@ -57,7 +57,7 @@ public class ScoreManager : MonoBehaviour
                 Instance.hitSFX.Play();
                 break;
         }
-        
+        */
         
 
         if (timing < 0.03 || EyeController.eyesClosed)
