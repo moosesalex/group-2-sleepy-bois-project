@@ -39,7 +39,6 @@ public class ResultsUIScript : MonoBehaviour
         rankText.fontSize = 36;
         if (score == 1000000)
         {
-            rankText.fontSize = 23;
             rankText.text = "Rank: PERFECT";
         }
         else if (score >= 980000) rankText.text = "Rank: S+";
