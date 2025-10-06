@@ -179,7 +179,7 @@ public class Lane : MonoBehaviour
                     inputIndex++;
                     if (!HitCheck(nextTimeStamp, audioTime))
                     {
-                        Miss(inputIndex-1);
+                        Miss(inputIndex - 2);
                     }
 
                 }
@@ -207,11 +207,11 @@ public class Lane : MonoBehaviour
         {
             hit = true;
             Hit(inputIndex, Math.Abs(audioTime - timeStamp));
-            print($"Hit on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
+            //print($"Hit on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
         }
         else
         {
-            print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
+            //print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
             Miss(inputIndex);
         }
         inputIndex++;
