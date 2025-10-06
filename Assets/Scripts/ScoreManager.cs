@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
     public static void Hit(double timing, int sound)
     {
         Instance.StopAllCoroutines();
-        /*
+        
 
         switch (sound)
         {
@@ -58,7 +58,7 @@ public class ScoreManager : MonoBehaviour
                 break;
         }
         
-        */
+        
 
         if (timing < 0.03 || EyeController.eyesClosed)
         {

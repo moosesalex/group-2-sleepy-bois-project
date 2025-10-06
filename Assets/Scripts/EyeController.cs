@@ -10,8 +10,11 @@ public class EyeController : MonoBehaviour
     private bool isClosing;
     private bool isOpening;
     private bool waitingToOpen;
+    private bool waitingToClose;
     private double timeInstantiated;
     private double delay;
+    private float t { get; set; }
+    
     // Use this for initialization
     void Start()
     {
@@ -25,16 +28,26 @@ public class EyeController : MonoBehaviour
     public void CloseEye(double inputDelay)
     {
         eyesClosed = true;
-        isClosing = true;
-        timeInstantiated = SongManager.GetAudioSourceTime() + delay;
+        isClosing = false;
+        waitingToClose = true;
+        timeInstantiated = SongManager.GetAudioSourceTime();
+        
         delay = inputDelay;
+        print(delay);
     }
     // Update is called once per frame
     void Update()
     {
+        double timeSinceInstantiated = SongManager.GetAudioSourceTime() - timeInstantiated;
 
-
-        if (isClosing)
+        t = (float)(timeSinceInstantiated / (SongManager.Instance.noteTime*2));
+        if (t > 0.3 && waitingToClose)
+        {
+            isClosing = true;
+            waitingToClose = false;
+            timeInstantiated = SongManager.GetAudioSourceTime();
+        }
+        else if (isClosing)
         {
             
             transform.position = Vector3.MoveTowards(transform.position, endingPos, speed * Time.deltaTime);
@@ -44,15 +57,10 @@ public class EyeController : MonoBehaviour
                 waitingToOpen = true;
             }
         }
-        if (waitingToOpen)
+        if (waitingToOpen && timeSinceInstantiated > delay)
         {
-            double timeSinceInstantiated = SongManager.GetAudioSourceTime() - timeInstantiated;
-            float t = (float)(timeSinceInstantiated / (SongManager.Instance.noteTime * 2));
-            if(t > 1)
-            {
-                isOpening = true;
-                waitingToOpen = false;
-            }
+            isOpening = true;
+            waitingToOpen = false;
         }
         if (isOpening)
         {

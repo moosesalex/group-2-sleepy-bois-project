@@ -29,7 +29,7 @@ public class Lane : MonoBehaviour
     public List<int> noteSounds = new List<int>();
     int spawnIndex = 0;
     int inputIndex = 0;
-    int yawnIndex = 0;
+    public int yawnIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +100,7 @@ public class Lane : MonoBehaviour
             }
             else if (note.NoteName == eyesNoteName)
             {
+                print(timeEnd);
                 eyesTimeStamps.Add(timeStart);
                 eyesTimeStamps.Add(timeEnd);
             }
@@ -138,7 +139,7 @@ public class Lane : MonoBehaviour
             if (SongManager.GetAudioSourceTime() >= startTimeStamp - SongManager.Instance.noteTime)
             {
                 ScoreManager.Yawn();
-                double delay = ((double)timeStamps[spawnIndex + 1]) - ((double)timeStamps[spawnIndex]);
+                double delay = ((double)eyesTimeStamps[yawnIndex + 1]) - ((double)eyesTimeStamps[yawnIndex]);
                 upperEye.GetComponent<EyeController>().CloseEye(delay);
                 lowerEye.GetComponent<EyeController>().CloseEye(delay);
                 yawnIndex += 2;
