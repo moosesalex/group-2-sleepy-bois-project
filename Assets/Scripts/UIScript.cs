@@ -73,7 +73,6 @@ public class UIScript : MonoBehaviour
     public void SwitchSongAndChart(Button pressedButton)
     {
         int index = Array.IndexOf(buttons, pressedButton);
-        print(index);
         if (!songManager.isSongPlaying && (index <= maxCompletedIndex + 1))
         {
             if (selectedButton != null)

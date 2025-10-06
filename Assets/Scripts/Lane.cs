@@ -237,6 +237,7 @@ public class Lane : MonoBehaviour
         spawnIndex = 0;
         inputIndex = 0;
         yawnIndex = 0;
+        SongManager.ResetAudioSourceTime();
     }
 
     private void Hit(int index, double timing)

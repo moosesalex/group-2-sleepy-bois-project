@@ -135,6 +135,14 @@ public class SongManager : MonoBehaviour
         }
     }
 
+    public static void ResetAudioSourceTime()
+    {
+        if (Instance.useNewAudioTime)
+        {
+            Instance.timeManager.ResetTime();
+        }
+    }
+
     /// <summary>
     /// Continuously checks if the song is finished, then calls ExitChart(false);
     /// </summary>
