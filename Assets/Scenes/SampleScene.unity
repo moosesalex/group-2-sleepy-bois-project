@@ -204,8 +204,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633675053}
   m_HandleRect: {fileID: 633675052}
   m_Direction: 2
-  m_Value: -0.011531372
-  m_Size: 0.601156
+  m_Value: -0.0000009155273
+  m_Size: 0.66464144
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3248,7 +3248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 101.15313}
+  m_AnchoredPosition: {x: 0, y: 100.0001}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &947986990
@@ -5179,7 +5179,7 @@ MonoBehaviour:
   noteTapY: -3
   useNewAudioTime: 1
   isSongPlaying: 0
-  midiFileName: BetaTest2.Mid
+  midiFileName: Tut.mid
 --- !u!4 &1787680573
 Transform:
   m_ObjectHideFlags: 0
@@ -5330,11 +5330,11 @@ MonoBehaviour:
   - {fileID: 37203024}
   - {fileID: 1226440601}
   songMidiNames:
-  - Level1Tut.mid
-  - Lv2_.mid
-  - Lv3_.mid
-  - Lv4_.mid
-  - Lv5_.mid
+  - Tut.mid
+  - Lvl2_fast.mid
+  - Lv3_fast.mid
+  - Lv4_fast.mid
+  - Lv5_fast.mid
   songLobbyDelays: []
 --- !u!1 &2051446799
 GameObject:
