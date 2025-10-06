@@ -100,7 +100,6 @@ public class Lane : MonoBehaviour
             }
             else if (note.NoteName == eyesNoteName)
             {
-                print(timeEnd);
                 eyesTimeStamps.Add(timeStart);
                 eyesTimeStamps.Add(timeEnd);
             }

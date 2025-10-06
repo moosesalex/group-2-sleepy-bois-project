@@ -111,4 +111,13 @@ public class UIScript : MonoBehaviour
         colors.normalColor = colors.selectedColor;
         button.colors = colors;
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            maxCompletedIndex += 1;
+            UpdateButtons();
+        }
+    }
 }

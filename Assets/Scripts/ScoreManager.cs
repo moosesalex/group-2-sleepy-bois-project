@@ -23,7 +23,7 @@ public class ScoreManager : MonoBehaviour
     private const float PERFECT_MULT = 1.0f;
     private const float GREAT_MULT = 0.85f;
     private const float GOOD_MULT = 0.65f;
-    private const float MISS_MULT= 0.0f;
+    private const float MISS_MULT = 0.0f;
 
     void Start()
     {
@@ -34,8 +34,8 @@ public class ScoreManager : MonoBehaviour
     public static void Hit(double timing, int sound)
     {
         Instance.StopAllCoroutines();
-        
-        
+
+
         switch (sound)
         {
             case 1:
@@ -57,8 +57,8 @@ public class ScoreManager : MonoBehaviour
                 Instance.hitSFX.Play();
                 break;
         }
-        
-        
+
+
 
         if (timing < 0.03 || EyeController.eyesClosed)
         {
@@ -110,7 +110,7 @@ public class ScoreManager : MonoBehaviour
 
     IEnumerator FadeOutText()
     {
-        yield return new WaitForSeconds(0.5f); 
-        judgementText.text = ""; 
+        yield return new WaitForSeconds(0.5f);
+        judgementText.text = "";
     }
 }

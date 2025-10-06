@@ -7,6 +7,7 @@ using System.IO;
 using UnityEngine.Networking;
 using System;
 using System.Linq;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class SongManager : MonoBehaviour
 {
@@ -63,6 +64,14 @@ public class SongManager : MonoBehaviour
             StopCoroutine(CheckIfAudioFinished());
             audioSource.Stop();
         }
+        else
+        {
+            if (UI.currentSongIndex >= UI.maxCompletedIndex && ScoreManager.comboScore >= 700000)
+            {
+                UI.maxCompletedIndex = UI.currentSongIndex;
+            }
+            UI.UpdateButtons();
+        }
 
         resultsUI.SetVals();
         resultsUI.ShowResults();
@@ -88,6 +97,8 @@ public class SongManager : MonoBehaviour
 
         char[] lettersToCheck = { 'G', 'D' };
         notesInSong = notes.Count;
+
+        Debug.Log(string.Join(", ", notes));
         
         foreach (Melanchall.DryWetMidi.Interaction.Note note in notes)
         {
@@ -100,6 +111,7 @@ public class SongManager : MonoBehaviour
                 }
             }
         }
+        print(notesInSong);
 
         scorePerNote = 1_000_000f / notesInSong;
 
@@ -153,12 +165,6 @@ public class SongManager : MonoBehaviour
             yield return null;
         }
 
-
-        if (UI.currentSongIndex >= UI.maxCompletedIndex)
-        {
-            UI.maxCompletedIndex = UI.currentSongIndex;
-        }
-        UI.UpdateButtons();
         ExitChart(false);
     }
 }
