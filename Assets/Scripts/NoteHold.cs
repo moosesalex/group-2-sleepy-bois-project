@@ -15,8 +15,8 @@ public class NoteHold : Note
         timeInstantiated2 = SongManager.GetAudioSourceTime() + (assignedEndTime - assignedTime);
 
         // Hold note look
-        lineRenderer.startWidth = 0.20f;
-        lineRenderer.endWidth = 0.20f;
+        lineRenderer.startWidth = 0.30f;
+        lineRenderer.endWidth = 0.30f;
         lineRenderer.startColor = Color.magenta;
         lineRenderer.endColor = Color.magenta;
 
