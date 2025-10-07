@@ -66,15 +66,18 @@ public class SongManager : MonoBehaviour
         }
         else
         {
+            // THIS ISN'T HAPPENING LOOOOOLLLLLLLLLLLLLLLLLL
+            /*
             if (UI.currentSongIndex >= UI.maxCompletedIndex && ScoreManager.comboScore >= 700000 && UI.currentSongIndex < 4)
             {
                 UI.maxCompletedIndex = UI.currentSongIndex;
             }
-            else if(ScoreManager.comboScore >= 950000)
+            else if (ScoreManager.comboScore >= 950000)
             {
                 UI.maxCompletedIndex = 4;
             }
             UI.UpdateButtons();
+            */
         }
 
         resultsUI.SetVals();

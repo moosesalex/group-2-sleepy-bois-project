@@ -205,7 +205,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 633675052}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.6648941
+  m_Size: 0.6666667
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5948,7 +5948,7 @@ MonoBehaviour:
   noteTapY: -3
   useNewAudioTime: 1
   isSongPlaying: 0
-  midiFileName: Tut.mid
+  midiFileName: Intro.mid
 --- !u!4 &1787680573
 Transform:
   m_ObjectHideFlags: 0
