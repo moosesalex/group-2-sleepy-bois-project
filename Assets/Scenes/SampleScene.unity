@@ -204,8 +204,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 633675053}
   m_HandleRect: {fileID: 633675052}
   m_Direction: 2
+<<<<<<< Updated upstream
   m_Value: 0
   m_Size: 0.6666667
+=======
+  m_Value: -0.000008697512
+  m_Size: 0.6652997
+>>>>>>> Stashed changes
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1564,6 +1569,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ad346713b39f44c52b9742cdd725cdc0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e9b6483c6df4e42aa97e401897c2cb02, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1855,11 +1861,11 @@ MonoBehaviour:
   hitSFX: {fileID: 2076148785}
   missSFX: {fileID: 196697199}
   yawnSFX: {fileID: 1112048778}
-  headphoneSFX: {fileID: 1750825199}
-  hugSFX: {fileID: 245837994}
-  coverSFX: {fileID: 783064874}
-  snoreSFX: {fileID: 385893937}
-  kickSFX: {fileID: 690877334}
+  headphoneSFX: {fileID: 2076148785}
+  hugSFX: {fileID: 2076148785}
+  coverSFX: {fileID: 2076148785}
+  snoreSFX: {fileID: 2076148785}
+  kickSFX: {fileID: 2076148785}
   scoreText: {fileID: 18088341}
   judgementText: {fileID: 1282635562}
   fadeDuration: 1
@@ -3789,7 +3795,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 99.99999}
+  m_AnchoredPosition: {x: 0, y: 100.00085}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &947986990
@@ -5998,7 +6004,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -267.79996, y: 111.33}
+  m_AnchoredPosition: {x: -267.8, y: 111.33002}
   m_SizeDelta: {x: -608.56, y: -387.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1842526628
@@ -6165,8 +6171,8 @@ MonoBehaviour:
   currLobbyMusic: {fileID: 0}
   currentSongIndex: 0
   audioClips:
-  - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
-  - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
+  - {fileID: 8300000, guid: e9b6483c6df4e42aa97e401897c2cb02, type: 3}
+  - {fileID: 8300000, guid: e9b6483c6df4e42aa97e401897c2cb02, type: 3}
   - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
   - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
   - {fileID: 8300000, guid: 51d9d0659be7fc34fa9f50f0a1376e7e, type: 3}
@@ -6179,8 +6185,8 @@ MonoBehaviour:
   - {fileID: 1226440601}
   - {fileID: 1401773740}
   songMidiNames:
-  - Tut.mid
-  - lv2fastfix.mid
+  - Intro.mid
+  - IntroAlt.mid
   - Lv3fast.mid
   - lv4fastfix.mid
   - Lv5fast.mid
@@ -6320,7 +6326,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 76b1d1de4a3850046abf0d7e71dda7bb, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.199
   m_Pitch: 1
   Loop: 0
   Mute: 0
