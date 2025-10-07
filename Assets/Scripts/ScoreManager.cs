@@ -60,13 +60,13 @@ public class ScoreManager : MonoBehaviour
 
 
 
-        if (timing < 0.03 || EyeController.eyesClosed)
+        if (timing < 0.06 || EyeController.eyesClosed)
         {
             curJudgement = "Perfect";
             Instance.judgementText.color = Color.yellow;
             comboScore += SongManager.scorePerNote * PERFECT_MULT;
         }
-        else if (timing < 0.05)
+        else if (timing < 0.1)
         {
             curJudgement = "Great";
             Instance.judgementText.color = Color.green;
